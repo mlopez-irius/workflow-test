@@ -1,0 +1,19 @@
+name: pr-test
+
+on: 
+    pull_request:
+        types:
+          - opened
+          - synchronize
+          - reopened
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+    
+        steps:
+            - name: Get code
+              uses: actions/checkout@v4
+            
+            - name: Build docker image
+              run: docker build -t test-image .
