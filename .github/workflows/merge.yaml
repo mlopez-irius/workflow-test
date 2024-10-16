@@ -26,3 +26,11 @@ jobs:
                     FINAL_TAG="else"
                 fi
                 echo "Docker final tab: $FINAL_TAG"
+            - name: Create GitHub TAG
+              env:
+                GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              run: |
+                git config user.name github-actions
+                git config user.email github-actions@github.com
+                git tag -a 0.0.1 -m "Release version 0.0.1"
+                git push origin 0.0.1
