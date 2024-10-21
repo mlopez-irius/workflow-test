@@ -14,6 +14,19 @@ jobs:
         steps:
             - name: Get code
               uses: actions/checkout@v4
+
+            - name: Determine Docker final tag
+              run: |
+                echo "GITHUB_REF: $GITHUB_REF"
+                echo ${{ github }}
+                if [[ "$GITHUB_REF" == "refs/heads/multitenant-develop" ]]; then
+                    FINAL_TAG="merging-to-develop"
+                elif [[ "$GITHUB_REF" == "refs/heads/multitenant" ]]; then
+                    FINAL_TAG="merging-to-main"
+                else
+                    FINAL_TAG="else"
+                fi
+                echo "Docker final tab: $FINAL_TAG"
             
             - name: Build docker image
               run: docker build -t test-image .
