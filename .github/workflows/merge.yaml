@@ -20,7 +20,7 @@ jobs:
             
             - name: Determine Docker final tag
               run: |
-                
+                echo "GITHUB_REF: $GITHUB_REF"
                 if [[ "$GITHUB_REF" == "refs/heads/multitenant-develop" ]]; then
                     FINAL_TAG="merging-to-develop"
                 elif [[ "$GITHUB_REF" == "refs/heads/multitenant" ]]; then
